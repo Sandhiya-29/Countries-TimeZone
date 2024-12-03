@@ -32,6 +32,12 @@ const CountryList: React.FC = () => {
   const loading = useSelector((state: RootState) => state.country.loading);
 
   const handleAddCountry = () => {
+    const timezoneRegex = /^[+-](0[0-9]|1[0-4]):[0-5][0-9]$/;
+  
+  if (!timezoneRegex.test(timezone)) {
+    setError('Invalid Time Zone! Format should be "+HH:MM" or "-HH:MM"');
+    return;
+  }
     const country = allCountries.find((c) => c.name.toLowerCase() === countryName.toLowerCase());
     if (!country) {
       setError('Country not found!');
