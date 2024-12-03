@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
+import store from './redux/Store';
+ import Countries from './components/Contries';
+import Header from './components/Header';
 import './App.css';
+import {  Route, Routes } from 'react-router-dom';
+import TimeCalculator from './components/TimeCalculator';
+import CountryList from './components/AddCountry';
 
-function App() {
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className='App'>
+        <Header />
+      
+       
+          <Routes>
+            <Route path='/timecalculator' element={<TimeCalculator />} />
+            <Route path='/' element={<Countries />} />
+            <Route path='/addcountries' element={<CountryList />} />
+          </Routes>
+       
+      
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;
