@@ -49,8 +49,38 @@ const Countries = () => {
   return (
     <>
     <div>
-   
     <TextField
+  sx={{
+    marginBottom: "20px",
+    marginTop: "10px",
+    width: {
+      xs: "90%", 
+      sm: "80%", 
+      md: "60%", 
+      lg: "50%", 
+    },
+    marginLeft: {
+      xs: "5%", 
+      sm: "10%",
+      md: "20%",
+      lg: "30%", 
+    },
+    alignItems: "center",
+  }}
+  label="Search Countries"
+  value={searchTerm}
+  placeholder="Search by country name"
+  className="text-input search-bar"
+  onChange={(e) => setSearchTerm(e.target.value)}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <SearchIcon />
+      </InputAdornment>
+    ),
+  }}
+/>
+    {/* <TextField
       sx={{
         marginBottom: "20px",
         alignItems: "left",
@@ -70,7 +100,7 @@ const Countries = () => {
           </InputAdornment>
         ),
       }}
-    /> 
+    />  */}
     <h3>Available Country List</h3>
     </div>
     <TableContainer className='table-container' sx={{borderRadius:2, boxShadow:3, }} >

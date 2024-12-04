@@ -148,26 +148,36 @@ const CountryList: React.FC = () => {
     <div>
      <div>
      <TextField
-      sx={{
-        marginBottom: "20px",
-        alignItems: "left",
-        width: "250px",
-        marginLeft:"60%",
-        marginTop:"10px"
-      }}
-      label="Search Countries"
-      value={searchTerm}
-      placeholder="Search by country name"
-      className="text-input search-bar"
-      onChange={(e) => setSearchTerm(e.target.value)}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon />
-          </InputAdornment>
-        ),
-      }}
-    /> 
+  sx={{
+    marginBottom: "20px",
+    marginTop: "10px",
+    width: {
+      xs: "90%", 
+      sm: "80%", 
+      md: "60%", 
+      lg: "50%", 
+    },
+    marginLeft: {
+      xs: "5%", 
+      sm: "10%",
+      md: "20%",
+      lg: "70%", 
+    },
+    alignItems: "center",
+  }}
+  label="Search Countries"
+  value={searchTerm}
+  placeholder="Search by country name"
+  className="text-input search-bar"
+  onChange={(e) => setSearchTerm(e.target.value)}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <SearchIcon />
+      </InputAdornment>
+    ),
+  }}
+/>
      </div>
       <div className="input">
       <TextField  sx={{ maxWidth: 250, marginLeft: 10 }}

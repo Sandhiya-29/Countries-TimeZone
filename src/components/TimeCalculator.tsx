@@ -53,7 +53,7 @@ const TimeCalculator: React.FC = () => {
       });
   
       if (!baseDateTime.isValid) {
-        setError('Invalid time format or timezone. Use HH:mm and a valid timezone.');
+        setError('Please give correct time format or timezone. Use HH:mm 00:00 and a valid timezone.');
         return;
       }
       const times: Record<string, string> = {};
@@ -104,6 +104,7 @@ const TimeCalculator: React.FC = () => {
           label="Current Time(HH:MM)"
           variant="outlined"
           value={currentTime}
+          autoComplete='off'
           placeholder="HH:MM"
           onChange={(e) => setCurrentTime(e.target.value)}
         />
@@ -152,4 +153,3 @@ const TimeCalculator: React.FC = () => {
 };
 
 export default TimeCalculator;
-
