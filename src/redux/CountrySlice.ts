@@ -57,7 +57,7 @@ const countrySlice = createSlice({
       if (!exists) {
         state.addedCountries.push(action.payload);
         saveToLocalStorage(state.addedCountries);
-      }
+      } 
     },
    
   },
