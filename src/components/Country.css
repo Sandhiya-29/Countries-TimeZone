@@ -8,7 +8,6 @@ body{
 }
 .heading{
    width: 1200;
-   height: 100px;
    background-color:#7c68a0;
 }
 .head{
@@ -16,9 +15,8 @@ body{
     flex-direction: row;
     justify-content: space-around;
     color: white;
-    padding-top: 20px;
 }
-.head h2{
+.head h3{
 cursor: pointer;
 }
 .input{
@@ -34,16 +32,13 @@ input{
    outline: none;
   border-radius: 5px;
 }
-
 .error-msg{
   margin-right: 70%;
     color: red;
 }
-
 ul{
     list-style: none;
 }
-
 .time-input{
     margin-left: 20px;
 }
@@ -66,7 +61,7 @@ ul{
    .input {
     display: flex;
     flex-direction: column;
-  margin-top: 20px;
+  margin-top: 30px;
     gap: 30px;
   }
    
@@ -98,8 +93,6 @@ ul{
     text-align: center;
     color: red;
   }
-  
-  
   ul {
     list-style: none;
   }
@@ -129,13 +122,11 @@ ul{
 .table-container{
   width: 500px;
 }  
-.head h2 {
+.head h3 {
   cursor: pointer;
-  padding: 10px;
   transition: all 0.3s ease;
 }
-.head h2.active {
-  color: rgb(47, 47, 59);  
+.head h3.active {
   text-decoration:underline;
 }
 
@@ -247,5 +238,17 @@ img {
 
 .table {
   width: 100%; 
+}
+.countries{
+  display: flex;
+  flex-direction: row;
+  gap:30px
+}
+.table-row:nth-child(even) {
+  background-color: #dedbdb; 
+}
+
+.table-row:nth-child(odd) {
+  background-color: #ffffff; 
 }
 

@@ -9,26 +9,26 @@ function Header() {
 
   return (
     <div>
-      <div className='heading'>
+      <div className='heading' style={{height:"80px"}}>
         <div className='head'>
-          <h2 
+          <h3
             className={isActive('/')} 
             onClick={() => navigate('/')}
           >
             Countries
-          </h2>
-          <h2 
+          </h3>
+          <h3 
             className={isActive('/addcountries')} 
             onClick={() => navigate('/addcountries')}
           >
-            Add Your Fav Countries Here
-          </h2>
-          <h2 
+            Add Your Fav Country
+          </h3>
+          <h3 
             className={isActive('/timecalculator')} 
             onClick={() => navigate('/timecalculator')}
           >
             Time Calculator
-          </h2>
+          </h3>
         </div>
       </div>
     </div>

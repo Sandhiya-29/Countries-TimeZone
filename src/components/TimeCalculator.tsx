@@ -114,9 +114,9 @@ const TimeCalculator: React.FC = () => {
 
       {error && <Typography className="error-msg">{error}</Typography>}
       
-      <TableContainer className="table-container" >
-        <Table className="table" sx={{maxWidth:800, border:1,}}>
-          <TableHead className="table-head">
+      <TableContainer className="table-container" sx={{boxShadow:10, borderRadius:3}} >
+        <Table className="table" sx={{maxWidth:800, }}>
+          <TableHead className="table-head" sx={{fontWeight:700}}>
             <TableRow>
               <TableCell>Countries</TableCell>
               <TableCell>Flag</TableCell>
@@ -126,7 +126,7 @@ const TimeCalculator: React.FC = () => {
           </TableHead>
           <TableBody>
             {addedCountries.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((country, index) => (
-              <TableRow key={index}>
+              <TableRow key={index} className='table-row'>
                 <TableCell>{country.name}</TableCell>
                 <TableCell>
                   <img src={country.flag} alt="Flag" width="70" height="50" />

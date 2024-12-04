@@ -29,13 +29,13 @@ const Countries = () => {
     dispatch(fetchCountries());
   }, [dispatch]);
 
-  
+
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 5));
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0); 
   };
 
@@ -48,13 +48,15 @@ const Countries = () => {
 
   return (
     <>
-    <h2>Countries</h2>
+    <div>
+   
     <TextField
       sx={{
         marginBottom: "20px",
         alignItems: "left",
-        width: "300px",
-        marginLeft:"40%"
+        width: "250px",
+        marginLeft:"70%",
+        marginTop:"10px"
       }}
       label="Search Countries"
       value={searchTerm}
@@ -69,17 +71,19 @@ const Countries = () => {
         ),
       }}
     /> 
-    <TableContainer >
-      <Table className="table"sx={{ maxWidth: 1000, height: 100 , marginLeft:20, border:1, }}>
-        <TableHead className='table-head'>
+    <h3>Available Country List</h3>
+    </div>
+    <TableContainer className='table-container' sx={{borderRadius:2, boxShadow:3, }} >
+      <Table className="table"sx={{ maxWidth: 900,  }}>
+        <TableHead className='table-head' sx={{fontWeight:"bold"}}>
           <TableRow>
-            <TableCell>Country</TableCell>
-            <TableCell>Flag</TableCell>
+            <TableCell sx={{fontWeight:"bold" , fontSize:18}}>Country</TableCell>
+            <TableCell sx={{fontWeight:"bold", fontSize:18}}>Flag</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {filteredCountries.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((country) => (
-            <TableRow key={country.name}>
+            <TableRow key={country.name} className='table-row'>
               <TableCell>{country.name}</TableCell>
               <TableCell>
                 <img src={country.flag} alt="Flag" width="70" height="50" />
@@ -91,7 +95,7 @@ const Countries = () => {
       <TablePagination
         rowsPerPageOptions={[ 10,25, 50]}
         component="div"
-        count={allCountries.length}
+        count={filteredCountries.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}  
