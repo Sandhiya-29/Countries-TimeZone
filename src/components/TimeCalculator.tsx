@@ -74,7 +74,7 @@ const TimeCalculator: React.FC = () => {
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 5));
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0); 
   };
 
@@ -139,7 +139,7 @@ const TimeCalculator: React.FC = () => {
           </TableBody>
         </Table>
         <TablePagination
-        rowsPerPageOptions={[ 10,25, 50]}
+        rowsPerPageOptions={[5, 10,25, 50]}
         component="div"
         count={addedCountries.length}
         rowsPerPage={rowsPerPage}

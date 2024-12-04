@@ -138,7 +138,7 @@ const CountryList: React.FC = () => {
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 5));
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0); 
   };
 
@@ -275,7 +275,7 @@ const CountryList: React.FC = () => {
 
         </Table>
         <TablePagination
-        rowsPerPageOptions={[ 10,25, 50]}
+        rowsPerPageOptions={[5, 10,25, 50]}
         component="div"
         count={filteredCountries.length}
         rowsPerPage={rowsPerPage}
