@@ -24,7 +24,6 @@ import './Country.css';
 const CountryList: React.FC = () => {
   const { addedCountries } = useSelector((state: RootState) => state.country);
   const [countryName, setCountryName] = useState('');
-  // const [timezoneSign, setTimezoneSign] = useState('+');
   const [hours, setHours] = useState('');
   const [minutes, setMinutes] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -92,7 +91,7 @@ const CountryList: React.FC = () => {
 
   const handleAddCountry = (e: React.FormEvent) => {
     e.preventDefault();
-    if(countryName === '' || hours === '' || minutes === ''){
+    if(countryName === '' || sign === '' || hours === '' || minutes === ''){
       alert("All fields are required");
     }
     else{
@@ -107,7 +106,10 @@ const CountryList: React.FC = () => {
       const addedCountries = JSON.parse(localStorage.getItem('countries') || '[]');
     
     if (!addedCountries.some((existingCountry: { name: string }) => existingCountry.name === Country.name)) {
-      const updatedCountries = [...addedCountries, { name: Country.name, flag: Country.flag, timezone: timeZone }];
+      const updatedCountries = [
+        { name: Country.name, flag: Country.flag, timezone: timeZone },
+        ...addedCountries, 
+      ];
       localStorage.setItem('countries', JSON.stringify(updatedCountries));
       alert("Country Added Successfully")
       dispatch(
@@ -119,13 +121,10 @@ const CountryList: React.FC = () => {
       
       );
     }
-      
     setCountryName('');
     setSign('');
     setHours('');
     setMinutes('');
-   
-    
   }
   };
 
@@ -266,7 +265,7 @@ const CountryList: React.FC = () => {
 
         </Table>
         <TablePagination
-        rowsPerPageOptions={[ 10,25, 50]}
+        rowsPerPageOptions={[5, 10,25, 50]}
         component="div"
         count={allCountries.length}
         rowsPerPage={rowsPerPage}

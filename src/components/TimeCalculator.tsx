@@ -34,7 +34,7 @@ const TimeCalculator: React.FC = () => {
 
   const handleCalculate = () => {
     if (!selectedCountry || !currentTime) {
-      setError('Please select a country and set the current time.');
+      setError('Please select a country and enter the current time.');
       return;
     }
 
@@ -59,7 +59,7 @@ const TimeCalculator: React.FC = () => {
       const times: Record<string, string> = {};
       addedCountries.forEach((country) => {
         const countryDateTime = baseDateTime.setZone(`UTC${country.timezone}`);
-        times[country.name] = countryDateTime.toFormat('HH:mm');
+        times[country.name] = countryDateTime.toFormat('hh:mm:a');
       });
   
       setCalculatedTimes(times);
@@ -83,7 +83,7 @@ const TimeCalculator: React.FC = () => {
   
   return (
     <div>
-      <h2 className="head-title"> Set Current Time</h2>
+      <h2 className="head-title"> Calculate Current Time</h2>
       <div className="dropdown-input">
         <Select sx={{marginBottom:"10px"}}
           value={selectedCountry}
@@ -101,7 +101,7 @@ const TimeCalculator: React.FC = () => {
           ))}
         </Select>
         <TextField sx={{marginLeft:"10px"}}
-          label="Set Current Time (HH:MM)"
+          label="Current Time(HH:MM)"
           variant="outlined"
           value={currentTime}
           placeholder="HH:MM"
@@ -114,7 +114,7 @@ const TimeCalculator: React.FC = () => {
 
       {error && <Typography className="error-msg">{error}</Typography>}
       
-      <TableContainer className="table-container" sx={{boxShadow:10, borderRadius:3}} >
+      <TableContainer className="table-container" sx={{boxShadow:5, borderRadius:2}} >
         <Table className="table" sx={{maxWidth:800, }}>
           <TableHead className="table-head" sx={{fontWeight:700}}>
             <TableRow>
@@ -138,7 +138,7 @@ const TimeCalculator: React.FC = () => {
           </TableBody>
         </Table>
         <TablePagination
-        rowsPerPageOptions={[ 10,25, 50]}
+        rowsPerPageOptions={[ 5,10,25, 50]}
         component="div"
         count={addedCountries.length}
         rowsPerPage={rowsPerPage}
