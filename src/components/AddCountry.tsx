@@ -275,9 +275,9 @@ const CountryList: React.FC = () => {
 
         </Table>
         <TablePagination
-        rowsPerPageOptions={[5, 10,25, 50]}
+        rowsPerPageOptions={[ 10,25, 50]}
         component="div"
-        count={allCountries.length}
+        count={filteredCountries.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}  
