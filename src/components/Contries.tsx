@@ -80,27 +80,7 @@ const Countries = () => {
     ),
   }}
 />
-    {/* <TextField
-      sx={{
-        marginBottom: "20px",
-        alignItems: "left",
-        width: "250px",
-        marginLeft:"70%",
-        marginTop:"10px"
-      }}
-      label="Search Countries"
-      value={searchTerm}
-      placeholder="Search by country name"
-      className="text-input search-bar"
-      onChange={(e) => setSearchTerm(e.target.value)}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon />
-          </InputAdornment>
-        ),
-      }}
-    />  */}
+   
     <h3>Available Country List</h3>
     </div>
     <TableContainer className='table-container' sx={{borderRadius:2, boxShadow:3, }} >
