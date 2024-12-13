@@ -170,6 +170,7 @@ const CountryList: React.FC = () => {
   placeholder="Search by country name"
   className="text-input search-bar"
   onChange={(e) => setSearchTerm(e.target.value)}
+  autoComplete='off'
   InputProps={{
     startAdornment: (
       <InputAdornment position="start">

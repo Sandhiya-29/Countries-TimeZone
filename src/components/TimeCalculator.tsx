@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { DateTime } from 'luxon';
-
+// import { DateTime } from 'luxon';
 
 import {
   Table,
@@ -31,13 +30,12 @@ const TimeCalculator: React.FC = () => {
 
   const loading = useSelector((state: RootState) => state.country.loading);
 
-
   const handleCalculate = () => {
     if (!selectedCountry || !currentTime) {
       setError('Please select a country and enter the current time.');
       return;
     }
-
+  
     const baseCountry = addedCountries.find(
       (c) => c.name.toLowerCase() === selectedCountry.toLowerCase()
     );
@@ -48,18 +46,27 @@ const TimeCalculator: React.FC = () => {
     }
   
     try {
-      const baseDateTime = DateTime.fromFormat(currentTime, 'HH:mm', {
-        zone: `UTC${baseCountry.timezone}`,
-      });
+      const [hours, minutes] = currentTime.split(':').map(Number);
   
-      if (!baseDateTime.isValid) {
-        setError('Please give correct time format or timezone. Use HH:mm 00:00 and a valid timezone.');
+      if (
+        isNaN(hours) ||
+        isNaN(minutes) ||
+        hours < 0 ||
+        hours > 24 ||
+        minutes < 0 ||
+        minutes > 59
+      ) {
+        setError('Invalid time format. Use HH:mm (24-hour format).');
         return;
       }
-      const times: Record<string, string> = {};
+      const baseTime = new Date();
+      baseTime.setUTCHours(hours, minutes, 0, 0); 
+  
+      const times : Record<string, string> = {};
       addedCountries.forEach((country) => {
-        const countryDateTime = baseDateTime.setZone(`UTC${country.timezone}`);
-        times[country.name] = countryDateTime.toFormat('hh:mm:a');
+        const timezoneOffset = parseInt(country.timezone, 10) || 0; 
+        const adjustedTime = new Date(baseTime.getTime() + timezoneOffset * 60 * 60 * 1000);
+        times[country.name] = adjustedTime.toISOString().slice(11, 19); 
       });
   
       setCalculatedTimes(times);
@@ -68,6 +75,44 @@ const TimeCalculator: React.FC = () => {
       setError('Error calculating time. Please check the inputs.');
     }
   };
+  
+
+  // const handleCalculate = () => {
+  //   if (!selectedCountry || !currentTime) {
+  //     setError('Please select a country and enter the current time.');
+  //     return;
+  //   }
+
+  //   const baseCountry = addedCountries.find(
+  //     (c) => c.name.toLowerCase() === selectedCountry.toLowerCase()
+  //   );
+  
+  //   if (!baseCountry) {
+  //     setError('Selected country not found.');
+  //     return;
+  //   }
+  
+  //   try {
+  //     const baseDateTime = DateTime.fromFormat(currentTime, 'HH:mm', {
+  //       zone: `UTC${baseCountry.timezone}`,
+  //     });
+  
+  //     if (!baseDateTime.isValid) {
+  //       setError('Please give correct time format or timezone. Use HH:mm 00:00 and a valid timezone.');
+  //       return;
+  //     }
+  //     const times: Record<string, string> = {};
+  //     addedCountries.forEach((country) => {
+  //       const countryDateTime = baseDateTime.setZone(`UTC${country.timezone}`);
+  //       times[country.name] = countryDateTime.toFormat('HH:mm:ss a');
+  //     });
+  
+  //     setCalculatedTimes(times);
+  //     setError('');
+  //   } catch (e) {
+  //     setError('Error calculating time. Please check the inputs.');
+  //   }
+  // };
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
     setPage(newPage);
@@ -79,8 +124,7 @@ const TimeCalculator: React.FC = () => {
   };
 
   if (loading) return <div>Loading...</div>;
-  
-  
+
   return (
     <div>
       <h2 className="head-title"> Calculate Current Time</h2>
@@ -101,7 +145,7 @@ const TimeCalculator: React.FC = () => {
           ))}
         </Select>
         <TextField sx={{marginLeft:"10px"}}
-          label="Current Time(HH:MM)"
+          label="Current Time(HH:MM)24hrs"
           variant="outlined"
           value={currentTime}
           autoComplete='off'
@@ -119,10 +163,10 @@ const TimeCalculator: React.FC = () => {
         <Table className="table" sx={{maxWidth:800, }}>
           <TableHead className="table-head" sx={{fontWeight:700}}>
             <TableRow>
-              <TableCell>Countries</TableCell>
-              <TableCell>Flag</TableCell>
-              <TableCell>Time Zone</TableCell>
-              <TableCell>Current Time</TableCell>
+              <TableCell sx={{fontWeight:"bold" , fontSize:18}}>Countries</TableCell>
+              <TableCell sx={{fontWeight:"bold" , fontSize:18}}>Flag</TableCell>
+              <TableCell sx={{fontWeight:"bold" , fontSize:18}}>Time Zone</TableCell>
+              <TableCell sx={{fontWeight:"bold" , fontSize:18}}>Current Time</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
